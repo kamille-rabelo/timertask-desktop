@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-White: #fff;
+  --color-Green-100: #D1FAE5;
+  --color-Green-300: #32B768;
+  --color-Green-400: #10B981;
+  --color-Green-500: #059669;
+
+  --color-Red-500: #EB4646;
+  --color-Red-400: #F24F4F;
+  --color-Red-100: #FEE2E2;
+
+  --color-Blue-300: #56A2FF;
+  --color-Blue-400: #2C8DFF;
+  --color-Blue-500: #1A75E0;
+  --color-Blue-600: #1565C0;
+  --color-Blue-100: #E0F2FE;
+
+  --color-Yellow-100: #FEF3C7;
+  --color-Yellow-400: #FBBF24;
+  --color-Yellow-500: #F59E0B;
+  
+  --color-Black-100: #BEC5D1;
+  --color-Black-200: #89909E;
+  --color-Black-300: #4B5563;
+  --color-Black-400: #9CA3AF;
+  --color-Black-450: #79818e;
+  --color-Black-500: #374151;
+  --color-Black-600: #2D3748;
+  --color-Black-700: #1F2937;
+  --color-Black-800: #1A202C;
+  --color-Black-900: #111827;
+}
+
+* {
+  font-family: 'Inter', Arial, sans-serif;
+  user-select: none;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+button {
+  /* Reset default button styles */
+  /* background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  outline: inherit;
+  height: auto; */
+  
+  /* Default styles */
+  cursor: pointer;
+}
+
+.body-df {
+  display: table;
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-White);
+}
+
+.dark .body-df {
+  background-color: var(--color-Black-900);
+} 
