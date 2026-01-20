@@ -1,6 +1,7 @@
 import { isPermissionGranted } from "@tauri-apps/plugin-notification";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
+import { TitleBar } from "../../layout/components/common/TitleBar";
 import { IndexHeader } from "./components/IndexHeader/IndexHeader";
 import { IndexNotificationRequest } from "./components/IndexNotificationRequest";
 import { IndexScore } from "./components/IndexScore";
@@ -51,29 +52,32 @@ export function IndexPage() {
   }, [setStateNotificationPermission]);
 
   return (
-    <div className="body-df min-h-screen max-h-screen flex flex-col items-center justify-center p-4">
-      <div className="flex w-full flex-col items-center">
-        <div className="flex w-full max-w-6xl flex-col items-center">
-          <IndexHeader showOnlyLogo={shouldBlockContent} />
-          {hasInitializedPermissionStatus && (
-            <>
-              {shouldBlockContent ? (
-                <div className="flex flex-col items-center justify-center flex-1 gap-6 p-4">
-                  <IndexNotificationRequest />
-                </div>
-              ) : (
-                <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-24 w-full">
-                  <div className="shrink-0 md:self-start pt-4 flex flex-col gap-8 items-center">
-                    <IndexTimer />
-                    <IndexScore />
+    <div className="body-df min-h-screen max-h-screen flex flex-col">
+      <TitleBar />
+      <div className="flex w-full flex-1 flex-col items-center justify-center p-4">
+        <div className="flex w-full flex-col items-center">
+          <div className="flex w-full max-w-6xl flex-col items-center">
+            <IndexHeader showOnlyLogo={shouldBlockContent} />
+            {hasInitializedPermissionStatus && (
+              <>
+                {shouldBlockContent ? (
+                  <div className="flex flex-1 flex-col items-center justify-center gap-6 p-4">
+                    <IndexNotificationRequest />
                   </div>
-                  <div className="flex-1 w-full max-w-2xl">
-                    <IndexTasks />
+                ) : (
+                  <div className="flex w-full flex-col items-center justify-center gap-24 md:flex-row md:items-start">
+                    <div className="flex shrink-0 flex-col items-center gap-8 pt-4 md:self-start">
+                      <IndexTimer />
+                      <IndexScore />
+                    </div>
+                    <div className="w-full max-w-2xl flex-1">
+                      <IndexTasks />
+                    </div>
                   </div>
-                </div>
-              )}
-            </>
-          )}
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>
