@@ -1,7 +1,6 @@
 import { isPermissionGranted } from "@tauri-apps/plugin-notification";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
-import { TitleBar } from "../../layout/components/common/TitleBar";
 import { IndexHeader } from "./components/IndexHeader/IndexHeader";
 import { IndexNotificationRequest } from "./components/IndexNotificationRequest";
 import { IndexScore } from "./components/IndexScore";
@@ -53,7 +52,6 @@ export function IndexPage() {
 
   return (
     <div className="body-df min-h-screen max-h-screen flex flex-col">
-      <TitleBar />
       <div className="flex w-full flex-1 flex-col items-center justify-center p-4">
         <div className="flex w-full flex-col items-center">
           <div className="flex w-full max-w-6xl flex-col items-center">
