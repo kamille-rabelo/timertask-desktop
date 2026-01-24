@@ -28,24 +28,24 @@ export function IndexTaskNoteDialog({
     store.state.tasks.find((item) => item.id === taskId),
   );
   const saveTaskNote = useTasksState((store) => store.actions.saveTaskNote);
-  const state = useState<IndexTaskNoteDialogState>({
+  const [dialogState, setDialogState] = useState<IndexTaskNoteDialogState>({
     isOpen: false,
     note: task?.note ?? "",
   });
 
-  const isDirty = state[0].note !== (task?.note ?? "");
+  const isDirty = dialogState.note !== (task?.note ?? "");
 
   useEffect(() => {
-    state[1]((prev) => ({ ...prev, note: task?.note ?? "" }));
-  }, [task?.note]);
+    setDialogState((prev) => ({ ...prev, note: task?.note ?? "" }));
+  }, [task?.note, setDialogState]);
 
   function handleOpenChange(isOpen: boolean) {
-    state[1]((prev) => ({ ...prev, isOpen }));
+    setDialogState((prev) => ({ ...prev, isOpen }));
   }
 
   function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
     const value = e.target.value;
-    state[1]((prev) => ({ ...prev, note: value }));
+    setDialogState((prev) => ({ ...prev, note: value }));
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
@@ -56,7 +56,7 @@ export function IndexTaskNoteDialog({
   }
 
   function handleSave() {
-    saveTaskNote(taskId, state[0].note);
+    saveTaskNote(taskId, dialogState.note);
   }
 
   if (!task) {
@@ -65,7 +65,7 @@ export function IndexTaskNoteDialog({
 
   return (
     <div className={className}>
-      <Dialog.Root isOpen={state[0].isOpen} onOpenChange={handleOpenChange}>
+      <Dialog.Root isOpen={dialogState.isOpen} onOpenChange={handleOpenChange}>
         <Dialog.Trigger>
           <Button
             variant="secondary"
@@ -78,12 +78,12 @@ export function IndexTaskNoteDialog({
         <Dialog.Content
           title={getDialogTitle(task.title)}
           description="Write a note for this task"
-          className="w-[550px]"
+          className="w-[550px] max-h-[80vh] overflow-auto"
         >
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 max-h-[60vh] overflow-auto">
             <textarea
               autoFocus
-              value={state[0].note}
+              value={dialogState.note}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
               placeholder="Write your notes here..."
