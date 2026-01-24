@@ -91,7 +91,7 @@ export function IndexSubTaskItem({
       .catch(() => {})
       .then(() => {
         sendNotification({
-          title: "Task Alert",
+          title: `Task: ${task.title}`,
           body: `Time: ${formatTime(currentTimeInSeconds)}${
             debuggingTimeInSeconds > 0
               ? ` | Debug: ${formatTime(debuggingTimeInSeconds)}`
