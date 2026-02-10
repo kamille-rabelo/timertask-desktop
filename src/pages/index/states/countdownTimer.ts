@@ -17,6 +17,7 @@ interface CountdownTimerActions {
   start: () => void;
   stop: () => void;
   reset: () => void;
+  goBackToWork: () => void;
   updateActivityMinutes: (activityMinutes: number) => void;
   goToRest: () => void;
   addExtraTime: (minutes: number) => void;
@@ -29,7 +30,7 @@ interface CountdownTimerStore {
 
 const secondsPerMinute = 60;
 const millisecondsPerSecond = 1000;
-const initialActivityMinutes = 1;
+const initialActivityMinutes = 25;
 
 function getRestMinutes(activityMinutes: number) {
   return activityMinutes * 0.2;
@@ -162,6 +163,29 @@ export const useCountdownTimerState = create<CountdownTimerStore>(
       });
     }
 
+    function goBackToWork() {
+      const store = get();
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+
+      endTimeRef.current = null;
+
+      const initialSeconds = store.state.activityMinutes * secondsPerMinute;
+
+      setState({
+        initialMinutes: store.state.activityMinutes,
+        currentTimeInSeconds: initialSeconds,
+        isRunning: false,
+        isResting: false,
+        extraAddedMinutes: 0,
+        totalCycles: store.state.totalCycles + 1,
+      });
+
+      start();
+    }
+
     function updateActivityMinutes(activityMinutes: number) {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
@@ -186,7 +210,6 @@ export const useCountdownTimerState = create<CountdownTimerStore>(
 
     function goToRest() {
       const store = get();
-      const completedCycles = store.state.totalCycles + 1;
 
       const baseRest = getRestMinutes(store.state.activityMinutes);
       const extraRest = store.state.extraAddedMinutes * 0.2;
@@ -197,7 +220,6 @@ export const useCountdownTimerState = create<CountdownTimerStore>(
         initialMinutes: restMinutes,
         currentTimeInSeconds: restMinutes * secondsPerMinute,
         isResting: true,
-        totalCycles: completedCycles,
         extraAddedMinutes: 0,
       });
 
@@ -236,6 +258,7 @@ export const useCountdownTimerState = create<CountdownTimerStore>(
         start,
         stop,
         reset,
+        goBackToWork,
         updateActivityMinutes,
         goToRest,
         addExtraTime,

@@ -10,6 +10,9 @@ export function IndexTimer() {
   const start = useCountdownTimerState((store) => store.actions.start);
   const stop = useCountdownTimerState((store) => store.actions.stop);
   const reset = useCountdownTimerState((store) => store.actions.reset);
+  const goBackToWork = useCountdownTimerState(
+    (store) => store.actions.goBackToWork,
+  );
   const goToRest = useCountdownTimerState((store) => store.actions.goToRest);
   const addExtraTime = useCountdownTimerState(
     (store) => store.actions.addExtraTime,
@@ -64,10 +67,7 @@ export function IndexTimer() {
                 <Button
                   className="flex-1 py-2 text-sm font-medium"
                   variant="primary"
-                  onClick={() => {
-                    reset();
-                    start();
-                  }}
+                  onClick={goBackToWork}
                 >
                   Back to Work
                 </Button>
@@ -113,10 +113,7 @@ export function IndexTimer() {
                     <Button
                       className="w-full py-2 text-base font-medium"
                       variant="primary"
-                      onClick={() => {
-                        reset();
-                        start();
-                      }}
+                      onClick={goBackToWork}
                     >
                       Skip <ArrowRight size={20} />
                     </Button>
