@@ -11,6 +11,7 @@ interface CountdownTimerState {
   totalCycles: number;
   isResting: boolean;
   extraAddedMinutes: number;
+  percentageOfRestingTime: number;
 }
 
 interface CountdownTimerActions {
@@ -21,6 +22,7 @@ interface CountdownTimerActions {
   updateActivityMinutes: (activityMinutes: number) => void;
   goToRest: () => void;
   addExtraTime: (minutes: number) => void;
+  updatePercentageOfRestingTime: (percentage: number) => void;
 }
 
 interface CountdownTimerStore {
@@ -31,12 +33,13 @@ interface CountdownTimerStore {
 const secondsPerMinute = 60;
 const millisecondsPerSecond = 1000;
 const initialActivityMinutes = 25;
+const initialPercentageOfRestingTime = 20;
 
-function getRestMinutes(activityMinutes: number) {
-  return activityMinutes * 0.2;
+function getRestMinutes(activityMinutes: number, percentage: number) {
+  return activityMinutes * (percentage / 100);
 }
 
-const initialRestMinutes = getRestMinutes(initialActivityMinutes);
+const initialRestMinutes = getRestMinutes(initialActivityMinutes, initialPercentageOfRestingTime);
 
 const intervalRef: { current: ReturnType<typeof setInterval> | null } = {
   current: null,
@@ -74,6 +77,8 @@ export const useCountdownTimerState = create<CountdownTimerStore>(
           isResting: partial.isResting ?? store.state.isResting,
           extraAddedMinutes:
             partial.extraAddedMinutes ?? store.state.extraAddedMinutes,
+          percentageOfRestingTime:
+            partial.percentageOfRestingTime ?? store.state.percentageOfRestingTime,
         },
         actions: store.actions,
       }));
@@ -187,6 +192,7 @@ export const useCountdownTimerState = create<CountdownTimerStore>(
     }
 
     function updateActivityMinutes(activityMinutes: number) {
+      const store = get();
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
         intervalRef.current = null;
@@ -194,7 +200,7 @@ export const useCountdownTimerState = create<CountdownTimerStore>(
 
       endTimeRef.current = null;
 
-      const restMinutes = getRestMinutes(activityMinutes);
+      const restMinutes = getRestMinutes(activityMinutes, store.state.percentageOfRestingTime);
       const initialSeconds = activityMinutes * secondsPerMinute;
 
       setState({
@@ -208,11 +214,23 @@ export const useCountdownTimerState = create<CountdownTimerStore>(
       });
     }
 
-    function goToRest() {
+    function updatePercentageOfRestingTime(percentage: number) {
       const store = get();
 
-      const baseRest = getRestMinutes(store.state.activityMinutes);
-      const extraRest = store.state.extraAddedMinutes * 0.2;
+      const restMinutes = getRestMinutes(store.state.activityMinutes, percentage);
+
+      setState({
+        percentageOfRestingTime: percentage,
+        restMinutes,
+      });
+    }
+
+    function goToRest() {
+      const store = get();
+      const percentage = store.state.percentageOfRestingTime;
+
+      const baseRest = getRestMinutes(store.state.activityMinutes, percentage);
+      const extraRest = store.state.extraAddedMinutes * (percentage / 100);
       const restMinutes = baseRest + extraRest;
 
       setState({
@@ -253,6 +271,7 @@ export const useCountdownTimerState = create<CountdownTimerStore>(
         totalCycles: 0,
         isResting: false,
         extraAddedMinutes: 0,
+        percentageOfRestingTime: initialPercentageOfRestingTime,
       },
       actions: {
         start,
@@ -262,6 +281,7 @@ export const useCountdownTimerState = create<CountdownTimerStore>(
         updateActivityMinutes,
         goToRest,
         addExtraTime,
+        updatePercentageOfRestingTime,
       },
     };
   },
