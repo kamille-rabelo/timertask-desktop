@@ -93,8 +93,8 @@ export function IndexTimer() {
                     className="w-full py-2 text-base font-medium"
                     variant="primary"
                     onClick={() => {
-                      addExtraTime(1);
-                      setLastExtraAddedMinutes(1);
+                      addExtraTime(5);
+                      setLastExtraAddedMinutes(5);
                     }}
                   >
                     +5 min
