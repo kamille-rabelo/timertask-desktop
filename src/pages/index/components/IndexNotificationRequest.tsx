@@ -39,14 +39,14 @@ export function IndexNotificationRequest() {
 
   return (
     <Box className="w-full max-w-xl p-8 flex flex-col items-center gap-5 text-center">
-      <div className="h-14 w-14 rounded-full bg-Blue-500/10 text-Blue-500 flex items-center justify-center">
+      <div className="h-14 w-14 rounded-full bg-[var(--theme-secondary-current)]/10 text-[var(--theme-secondary-current)] flex items-center justify-center">
         <BellOff size={30} />
       </div>
       <div className="flex flex-col gap-2">
-        <p className="text-2xl font-semibold text-Black-700 dark:text-White">
+        <p className="text-2xl font-semibold text-[var(--theme-text-current)]">
           Allow notifications
         </p>
-        <p className="text-sm text-Black-400">
+        <p className="text-sm text-[var(--theme-subtext-current)]">
           We need your permission to send task reminders and track time in real
           time.
         </p>
@@ -54,7 +54,7 @@ export function IndexNotificationRequest() {
       <button
         onClick={handleRequestPermission}
         disabled={stateNotificationPermission.isRequestingPermission}
-        className="px-5 py-3 rounded-full bg-Blue-500 text-White font-semibold hover:bg-Blue-400 transition disabled:opacity-60 disabled:cursor-not-allowed dark:bg-Blue-600 dark:hover:bg-Blue-500"
+        className="px-5 py-3 rounded-full bg-[var(--theme-secondary-current)] text-White font-semibold hover:opacity-90 transition disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {stateNotificationPermission.isRequestingPermission
           ? "Requesting permission..."

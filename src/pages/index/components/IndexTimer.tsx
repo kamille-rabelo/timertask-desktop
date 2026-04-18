@@ -48,7 +48,9 @@ export function IndexTimer() {
           extraAddedMinutes > 0 ? lastExtraAddedMinutes : undefined
         }
         strokeColor={
-          isResting ? "var(--color-Blue-400)" : "var(--color-Green-400)"
+          isResting
+            ? "var(--theme-secondary-current)"
+            : "var(--theme-accent-current)"
         }
       />
       <div className="pt-4 flex flex-col gap-4 px-8">

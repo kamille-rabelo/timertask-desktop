@@ -60,33 +60,33 @@ export function IndexTaskNote({ taskId, className }: IndexTaskNoteProps) {
   return (
     <div
       className={twMerge(
-        "mt-4 border border-Black-100/20 rounded-xl overflow-hidden dark:border-Black-600",
+        "mt-4 border border-[var(--theme-border-current)]/30 rounded-xl overflow-hidden",
         className,
       )}
     >
       <button
         onClick={handleToggleOpen}
-        className="w-full flex items-center justify-between p-4 bg-White hover:bg-Black-50/10 transition-colors dark:bg-Black-700 dark:hover:bg-Black-600"
+        className="w-full flex items-center justify-between p-4 bg-[var(--theme-surface-current)] hover:bg-[var(--theme-border-current)]/30 transition-colors"
       >
-        <div className="flex items-center gap-2 text-Black-700 dark:text-White">
-          <NotebookPen className="w-5 h-5 text-Green-400" />
+        <div className="flex items-center gap-2 text-[var(--theme-text-current)]">
+          <NotebookPen className="w-5 h-5 text-[var(--theme-accent-current)]" />
           <span className="font-semibold text-sm">{getHeaderLabel()}</span>
         </div>
         {state.isOpen ? (
-          <ChevronUp className="w-5 h-5 text-Black-400" />
+          <ChevronUp className="w-5 h-5 text-[var(--theme-subtext-current)]" />
         ) : (
-          <ChevronDown className="w-5 h-5 text-Black-400" />
+          <ChevronDown className="w-5 h-5 text-[var(--theme-subtext-current)]" />
         )}
       </button>
 
       {state.isOpen && (
-        <div className="p-4 bg-White border-t border-Black-100/10 flex flex-col gap-3 dark:bg-Black-700 dark:border-Black-600">
+        <div className="p-4 bg-[var(--theme-surface-current)] border-t border-[var(--theme-border-current)]/30 flex flex-col gap-3">
           <textarea
             value={state.note}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
             placeholder="Write your notes here..."
-            className="w-full min-h-[200px] p-4 text-sm text-Black-700 placeholder:text-Black-400 bg-Black-50/20 border border-Black-100 rounded-xl outline-none focus:border-Green-400 focus:ring-1 focus:ring-Green-400 transition-all resize-none dark:bg-Black-800 dark:border-Black-500 dark:text-White field-sizing-content"
+            className="w-full min-h-[200px] p-4 text-sm text-[var(--theme-text-current)] placeholder:text-[var(--theme-subtext-current)] bg-[var(--theme-surface-current)] border border-[var(--theme-border-current)] rounded-xl outline-none focus:border-[var(--theme-accent-current)] focus:ring-1 focus:ring-[var(--theme-accent-current)] transition-all resize-none field-sizing-content"
           />
           <div className="flex justify-end gap-2">
             <IndexTaskNoteDialog

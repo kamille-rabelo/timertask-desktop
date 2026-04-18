@@ -15,11 +15,10 @@ export function Button({
   ...props
 }: ButtonProps) {
   const variantStyles: Record<ButtonVariant, string> = {
-    primary:
-      "bg-Green-400 hover:bg-Green-300 text-White dark:bg-Green-500 dark:hover:bg-Green-400",
+    primary: "bg-[var(--theme-accent-current)] hover:opacity-90 text-White",
     danger: "bg-Red-500 hover:bg-Red-400 text-White",
     secondary:
-      "bg-Blue-400 hover:bg-Blue-300 text-White dark:bg-Blue-600 dark:hover:bg-Blue-500",
+      "bg-[var(--theme-secondary-current)] hover:opacity-90 text-White",
   };
 
   return (

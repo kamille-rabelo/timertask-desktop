@@ -2,6 +2,7 @@ import { Logo } from "../../../../layout/components/atoms/Logo";
 import { useStoredWorkflows } from "../../hooks/useStoredWorkflows";
 import { useWorkflowsState } from "../../states/workflows";
 import { IndexDarkModeToggle } from "./components/IndexDarkModeToggle";
+import { IndexThemePicker } from "./components/IndexThemePicker";
 import { IndexWorkflowDialog } from "./components/IndexWorkflowDialog/IndexWorkflowDialog";
 import { IndexWorkflowSelector } from "./components/IndexWorkflowSelector";
 
@@ -44,6 +45,7 @@ export function IndexHeader({ showOnlyLogo }: IndexHeaderProps) {
           onChange={handleWorkflowChange}
         />
         <IndexWorkflowDialog />
+        <IndexThemePicker />
         <IndexDarkModeToggle />
       </div>
     </div>

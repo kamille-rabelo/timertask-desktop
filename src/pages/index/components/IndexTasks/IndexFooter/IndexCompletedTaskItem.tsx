@@ -70,18 +70,18 @@ export function IndexCompletedTaskItem({
   const hasTrackedTime = taskEvents.length > 0;
 
   return (
-    <div className="group flex flex-col p-4 rounded-xl bg-white border border-Black-100/30 opacity-95 dark:bg-Black-700 dark:border-Black-600">
+    <div className="group flex flex-col p-4 rounded-xl bg-[var(--theme-surface-current)] border border-[var(--theme-border-current)]/50 opacity-95">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4 flex-1">
           <div className="w-5 h-5" />
-          <div className="w-6 h-6 rounded-full border-2 flex items-center justify-center border-Green-400 bg-Green-400 shrink-0">
+          <div className="w-6 h-6 rounded-full border-2 flex items-center justify-center border-[var(--theme-accent-current)] bg-[var(--theme-accent-current)] shrink-0">
             <Check className="w-4 h-4 text-White" strokeWidth={3} />
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-sm font-medium text-Black-450 dark:text-Black-400 break-all">
+            <span className="text-sm font-medium text-[var(--theme-subtext-current)] break-all">
               {task.title}
             </span>
-            <div className="flex items-center gap-2 text-xs text-Black-400">
+            <div className="flex items-center gap-2 text-xs text-[var(--theme-subtext-current)]">
               {hasTrackedTime ? (
                 <>
                   <span className="font-medium">
@@ -105,7 +105,7 @@ export function IndexCompletedTaskItem({
           {hasTrackedTime && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="text-Blue-400 hover:text-Blue-500 transition-colors p-1"
+              className="text-[var(--theme-secondary-current)] hover:opacity-75 transition-colors p-1"
             >
               {isExpanded ? (
                 <ChevronUp className="w-5 h-5" />
@@ -123,10 +123,10 @@ export function IndexCompletedTaskItem({
               key={`${task.id}-${index}`}
               className="flex items-center gap-3"
             >
-              <div className="w-5 h-5 rounded-full border-2 flex items-center justify-center border-Green-400 bg-Green-400 shrink-0 scale-75">
+              <div className="w-5 h-5 rounded-full border-2 flex items-center justify-center border-[var(--theme-accent-current)] bg-[var(--theme-accent-current)] shrink-0 scale-75">
                 <Check className="w-4 h-4 text-White" strokeWidth={3} />
               </div>
-              <span className="text-sm text-Black-450 dark:text-Black-400 break-all">
+              <span className="text-sm text-[var(--theme-subtext-current)] break-all">
                 {event.type} {formatClockTime(new Date(event.createdAt))}
               </span>
             </div>

@@ -61,12 +61,12 @@ export function Timer({
     timerDisplayInSeconds,
     lastExtraAddedMinutes,
   );
-  const circleStrokeColor = strokeColor ?? "var(--color-Green-400)";
+  const circleStrokeColor = strokeColor ?? "var(--theme-accent-current)";
 
   return (
     <div
       className={twMerge(
-        "relative flex items-center justify-center rounded-full bg-White text-Black-700 font-bold shadow-lg dark:bg-Black-800 dark:text-White",
+        "relative flex items-center justify-center rounded-full bg-[var(--theme-surface-current)] text-[var(--theme-text-current)] font-bold shadow-lg",
         className,
       )}
     >
@@ -87,7 +87,7 @@ export function Timer({
           className="transition-all duration-1000 ease-linear"
         />
       </svg>
-      <span className="z-10 tabular-nums">{`${minutesLeft}:${secondsLeft}`}</span>
+      <span className="z-10 tabular-nums font-numeric">{`${minutesLeft}:${secondsLeft}`}</span>
     </div>
   );
 }

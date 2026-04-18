@@ -73,7 +73,7 @@ export function IndexTaskAccordionSubtaskItem({
   return (
     <div
       className={twMerge(
-        "flex items-center justify-between gap-3 rounded-lg border border-Black-100/30 bg-White px-3 py-2 dark:bg-Black-700 dark:border-Black-600",
+        "flex items-center justify-between gap-3 rounded-lg border border-[var(--theme-border-current)]/50 bg-[var(--theme-surface-current)] px-3 py-2",
         className,
       )}
     >
@@ -88,7 +88,7 @@ export function IndexTaskAccordionSubtaskItem({
           />
           <button
             onClick={handleSave}
-            className="p-2 text-Green-300 hover:text-Green-400 transition-colors"
+            className="p-2 text-[var(--theme-accent-current)]/70 hover:text-[var(--theme-accent-current)] transition-colors"
           >
             <Check className="w-5 h-5" />
           </button>
@@ -104,8 +104,8 @@ export function IndexTaskAccordionSubtaskItem({
           <span
             className={
               subtask.completed
-                ? "text-Black-400 line-through text-sm"
-                : "text-Black-600 dark:text-Black-400 text-sm"
+                ? "text-[var(--theme-subtext-current)] line-through text-sm"
+                : "text-[var(--theme-subtext-current)] text-sm"
             }
           >
             {subtask.title}

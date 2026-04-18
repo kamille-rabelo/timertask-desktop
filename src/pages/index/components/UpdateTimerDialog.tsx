@@ -1,5 +1,8 @@
 import type { ChangeEvent } from "react";
 import { Dialog } from "../../../layout/components/atoms/Dialog";
+import { useColorTheme } from "../../../layout/hooks/useColorTheme";
+import { colorThemes } from "../../../code/utils/themes";
+import { useDarkMode } from "../../../layout/hooks/useDarkMode";
 import { useCountdownTimerState } from "../states/countdownTimer";
 
 const minimumActivityMinutes = 10;
@@ -40,6 +43,10 @@ export function UpdateTimerDialog({
     (store) => store.actions.updatePercentageOfRestingTime,
   );
 
+  const colorThemeName = useColorTheme((s) => s.colorTheme);
+  const { isDark } = useDarkMode();
+  const palette = colorThemes[colorThemeName][isDark ? "dark" : "light"];
+
   function handleActivityMinutesChange(event: ChangeEvent<HTMLInputElement>) {
     const nextMinutes = Number(event.target.value);
     updateActivityMinutes(nextMinutes);
@@ -58,7 +65,7 @@ export function UpdateTimerDialog({
       >
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between text-sm font-medium text-Black-450">
+            <div className="flex items-center justify-between text-sm font-medium text-[var(--theme-subtext-current)]">
               <span>Activity time</span>
               <span>{activityMinutes} min</span>
             </div>
@@ -69,15 +76,16 @@ export function UpdateTimerDialog({
               step={1}
               value={activityMinutes}
               onChange={handleActivityMinutesChange}
-              className="w-full accent-Green-400 cursor-pointer"
+              className="w-full cursor-pointer"
+              style={{ accentColor: palette.accent }}
             />
-            <div className="flex items-center justify-between text-xs text-Black-300">
+            <div className="flex items-center justify-between text-xs text-[var(--theme-subtext-current)]">
               <span>{minimumActivityMinutes} min</span>
               <span>{maximumActivityMinutes} min</span>
             </div>
           </div>
           <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between text-sm font-medium text-Black-450">
+            <div className="flex items-center justify-between text-sm font-medium text-[var(--theme-subtext-current)]">
               <span>Resting time</span>
               <span>{percentageOfRestingTime}%</span>
             </div>
@@ -88,16 +96,17 @@ export function UpdateTimerDialog({
               step={1}
               value={percentageOfRestingTime}
               onChange={handleRestPercentageChange}
-              className="w-full accent-Blue-400 cursor-pointer"
+              className="w-full cursor-pointer"
+              style={{ accentColor: palette.secondary }}
             />
-            <div className="flex items-center justify-between text-xs text-Black-300">
+            <div className="flex items-center justify-between text-xs text-[var(--theme-subtext-current)]">
               <span>{minimumRestPercentage}%</span>
               <span>{maximumRestPercentage}%</span>
             </div>
           </div>
         </div>
         <Dialog.Footer>
-          <div className="flex items-center justify-between text-sm text-Black-300">
+          <div className="flex items-center justify-between text-sm text-[var(--theme-subtext-current)]">
             <span>Resting time ({percentageOfRestingTime}%)</span>
             <span>{formatMinutes(restMinutes)} min</span>
           </div>

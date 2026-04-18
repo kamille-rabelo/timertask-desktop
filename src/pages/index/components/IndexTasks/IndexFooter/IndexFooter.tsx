@@ -1,6 +1,7 @@
 import { Check, ChevronDown, ChevronUp, RotateCcw } from "lucide-react";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { playSound } from "../../../../../code/utils/audio";
 import { Button } from "../../../../../layout/components/atoms/Button";
 import { ProgressBar } from "../../../../../layout/components/atoms/ProgressBar";
 import { useListingTasks } from "../../../hooks/useListingTasks";
@@ -48,6 +49,7 @@ export function IndexFooter({
   function handleFinishTask() {
     if (!inExecutionTaskId) return;
 
+    playSound("/completed-task.mp3").catch(() => {});
     toggleTask(inExecutionTaskId);
 
     if (onFinishTask) {
@@ -72,12 +74,12 @@ export function IndexFooter({
 
   return (
     <div>
-      <div className="flex items-center justify-between py-2 border-b border-Black-100/20 dark:border-Black-600">
+      <div className="flex items-center justify-between py-2 border-b border-[var(--theme-border-current)]/30">
         <div
           className={twMerge(
-            "flex items-center gap-1 transition-colors text-Black-450 dark:text-Black-400",
+            "flex items-center gap-1 transition-colors text-[var(--theme-subtext-current)]",
             completedTasks.length > 0
-              ? "cursor-pointer hover:text-Black-300"
+              ? "cursor-pointer hover:text-[var(--theme-text-current)]"
               : "",
           )}
           onClick={

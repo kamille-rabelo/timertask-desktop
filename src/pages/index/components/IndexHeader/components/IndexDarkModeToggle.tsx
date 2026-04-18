@@ -8,7 +8,7 @@ export function IndexDarkModeToggle() {
     <button
       type="button"
       onClick={darkMode.toggleTheme}
-      className="flex items-center p-2 justify-center rounded-xl border border-Black-100 bg-White text-Black-500 transition-colors hover:bg-Black-100 dark:border-Black-600 dark:bg-Black-700 dark:text-White dark:hover:bg-Black-600"
+      className="flex items-center p-2 justify-center rounded-xl border border-[var(--theme-border-current)] bg-[var(--theme-surface-current)] text-[var(--theme-text-current)] transition-colors hover:bg-[var(--theme-border-current)]"
       title={darkMode.isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {darkMode.isDark ? (

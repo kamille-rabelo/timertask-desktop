@@ -9,7 +9,7 @@ export function IndexWorkflowDialog() {
       <Dialog.Trigger>
         <button
           type="button"
-          className="flex items-center p-2 justify-center rounded-xl border border-Blue-400 bg-Blue-400 text-White transition-colors hover:bg-Blue-300 dark:bg-Blue-600 dark:border-Blue-600 dark:hover:bg-Blue-500"
+          className="flex items-center p-2 justify-center rounded-xl border border-[var(--theme-secondary-current)] bg-[var(--theme-secondary-current)] text-White transition-colors hover:opacity-90"
         >
           <Settings className="h-5 w-5" />
         </button>

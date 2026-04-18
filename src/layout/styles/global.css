@@ -1,53 +1,82 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jersey+15&family=Pixelify+Sans:wght@400..700&display=swap");
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --color-White: #fff;
-  --color-Green-100: #D1FAE5;
-  --color-Green-300: #32B768;
-  --color-Green-400: #10B981;
+  --color-Green-100: #d1fae5;
+  --color-Green-300: #32b768;
+  --color-Green-400: #10b981;
   --color-Green-500: #059669;
 
-  --color-Red-500: #EB4646;
-  --color-Red-400: #F24F4F;
-  --color-Red-100: #FEE2E2;
+  --color-Red-500: #eb4646;
+  --color-Red-400: #f24f4f;
+  --color-Red-100: #fee2e2;
 
-  --color-Blue-300: #56A2FF;
-  --color-Blue-400: #2C8DFF;
-  --color-Blue-500: #1A75E0;
-  --color-Blue-600: #1565C0;
-  --color-Blue-100: #E0F2FE;
+  --color-Blue-300: #56a2ff;
+  --color-Blue-400: #2c8dff;
+  --color-Blue-500: #1a75e0;
+  --color-Blue-600: #1565c0;
+  --color-Blue-100: #e0f2fe;
 
-  --color-Yellow-100: #FEF3C7;
-  --color-Yellow-400: #FBBF24;
-  --color-Yellow-500: #F59E0B;
-  
-  --color-Black-100: #BEC5D1;
-  --color-Black-200: #89909E;
-  --color-Black-300: #6B7280;
-  --color-Black-400: #9CA3AF;
+  --color-Yellow-100: #fef3c7;
+  --color-Yellow-400: #fbbf24;
+  --color-Yellow-500: #f59e0b;
+
+  --color-Black-100: #bec5d1;
+  --color-Black-200: #89909e;
+  --color-Black-300: #6b7280;
+  --color-Black-400: #9ca3af;
   --color-Black-450: #79818e;
   --color-Black-500: #374151;
-  --color-Black-600: #2D3748;
-  --color-Black-700: #1F2937;
-  --color-Black-800: #1A202C;
+  --color-Black-600: #2d3748;
+  --color-Black-700: #1f2937;
+  --color-Black-800: #1a202c;
   --color-Black-900: #111827;
 }
 
+:root {
+  --theme-bg-current: var(--theme-bg-light, #ffffff);
+  --theme-surface-current: var(--theme-surface-light, #f3f4f6);
+  --theme-border-current: var(--theme-border-light, #bec5d1);
+  --theme-text-current: var(--theme-text-light, #374151);
+  --theme-subtext-current: var(--theme-subtext-light, #6b7280);
+  --theme-accent-current: var(--theme-accent-light, #059669);
+  --theme-secondary-current: var(--theme-secondary-light, #1a75e0);
+}
+
+.dark {
+  --theme-bg-current: var(--theme-bg-dark, #111827);
+  --theme-surface-current: var(--theme-surface-dark, #1f2937);
+  --theme-border-current: var(--theme-border-dark, #2d3748);
+  --theme-text-current: var(--theme-text-dark, #f9fafb);
+  --theme-subtext-current: var(--theme-subtext-dark, #9ca3af);
+  --theme-accent-current: var(--theme-accent-dark, #10b981);
+  --theme-secondary-current: var(--theme-secondary-dark, #2c8dff);
+}
+
 * {
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: "Pixelify Sans", "Inter", Arial, sans-serif;
   user-select: none;
 }
 
-html, body, #root {
-  height: 100%;
-  background-color: var(--color-White);
+.font-numeric {
+  font-family: "Jersey 15", Arial, sans-serif;
 }
 
-.dark, .dark body, .dark #root {
-  background-color: var(--color-Black-900);
+html,
+body,
+#root {
+  height: 100%;
+  background-color: var(--theme-bg-light, var(--color-White));
+}
+
+.dark,
+.dark body,
+.dark #root {
+  background-color: var(--theme-bg-dark, var(--color-Black-900));
 }
 
 button {
@@ -59,7 +88,7 @@ button {
   font: inherit;
   outline: inherit;
   height: auto; */
-  
+
   /* Default styles */
   cursor: pointer;
 }
@@ -67,9 +96,9 @@ button {
 .body-df {
   height: 100%;
   width: 100%;
-  background-color: var(--color-White);
+  background-color: var(--theme-bg-light, var(--color-White));
 }
 
 .dark .body-df {
-  background-color: var(--color-Black-900);
-} 
+  background-color: var(--theme-bg-dark, var(--color-Black-900));
+}

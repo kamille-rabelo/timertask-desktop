@@ -9,6 +9,7 @@ import {
   Trash2,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { playSound } from "../../../../../../code/utils/audio";
 import { formatTime } from "../../../../../../code/utils/date";
 import { Timer } from "../../../../../../layout/components/common/Timer";
 import { useCountUpTimer } from "../../../../../../layout/components/common/Timer/hooks/useCountUpTimer";
@@ -83,22 +84,15 @@ export function IndexSubTaskItem({
     const debuggingTimeInSeconds =
       debuggingTimerRef.current?.getDebuggingTimeInSeconds() ?? 0;
 
-    const alarmAudio = new Audio("/alarm-loop.mp3");
-    const restartPositionInSeconds = 0;
-    alarmAudio.currentTime = restartPositionInSeconds;
-    alarmAudio
-      .play()
-      .catch(() => {})
-      .then(() => {
-        sendNotification({
-          title: `Task: ${task.title}`,
-          body: `Time: ${formatTime(currentTimeInSeconds)}${
-            debuggingTimeInSeconds > 0
-              ? ` | Debug: ${formatTime(debuggingTimeInSeconds)}`
-              : ""
-          }`,
-        });
-      });
+    playSound("/alarm-loop.mp3").catch(() => {});
+    sendNotification({
+      title: `Task: ${task.title}`,
+      body: `Time: ${formatTime(currentTimeInSeconds)}${
+        debuggingTimeInSeconds > 0
+          ? ` | Debug: ${formatTime(debuggingTimeInSeconds)}`
+          : ""
+      }`,
+    });
   }
 
   function handleEditTask(taskId: string) {
@@ -144,12 +138,12 @@ export function IndexSubTaskItem({
   }, [timerState.currentTimeInSeconds, state.alertMinutes]);
 
   return (
-    <div className="group space-y-0 bg-Black-100/50 border border-Black-300/15 rounded-xl dark:bg-Black-700/50 dark:border-Black-600">
+    <div className="group space-y-0 bg-[var(--theme-surface-current)]/50 border border-[var(--theme-border-current)]/30 rounded-xl">
       <div
-        className={`flex items-center justify-between p-4 rounded-xl bg-white border transition-all shadow-sm hover:shadow-md dark:bg-Black-700 ${
+        className={`flex items-center justify-between p-4 rounded-xl bg-[var(--theme-surface-current)] border transition-all shadow-sm hover:shadow-md ${
           isActive
-            ? "border-Green-400 bg-Green-50/30 dark:bg-Green-400/10"
-            : "border-Black-100/30 hover:border-Green-400/50 dark:border-Black-600"
+            ? "border-[var(--theme-accent-current)] bg-[var(--theme-accent-current)]/5"
+            : "border-[var(--theme-border-current)]/30 hover:border-[var(--theme-accent-current)]/50"
         }`}
       >
         {isEditing ? (
@@ -161,7 +155,7 @@ export function IndexSubTaskItem({
                 {!task.isRunning && (
                   <div
                     {...dragHandleProps}
-                    className="cursor-grab active:cursor-grabbing text-Black-400 hover:text-Black-700 dark:hover:text-White transition-colors"
+                    className="cursor-grab active:cursor-grabbing text-[var(--theme-subtext-current)] hover:text-[var(--theme-text-current)] transition-colors"
                   >
                     <GripVertical className="w-5 h-5" />
                   </div>
@@ -183,10 +177,10 @@ export function IndexSubTaskItem({
               <span
                 className={`text-sm font-medium transition-colors break-all ${
                   task.completed
-                    ? "text-Black-400 line-through"
+                    ? "text-[var(--theme-subtext-current)] line-through"
                     : isActive
-                      ? "text-Black-700 dark:text-White font-semibold"
-                      : "text-Black-500 dark:text-Black-400"
+                      ? "text-[var(--theme-text-current)] font-semibold"
+                      : "text-[var(--theme-subtext-current)]"
                 }`}
               >
                 {task.title}
@@ -220,7 +214,7 @@ export function IndexSubTaskItem({
                     onClick={() =>
                       handleToggleSubtaskTimer(isGlobalTimerRunning)
                     }
-                    className="text-Green-400 hover:text-Green-500 transition-all p-2"
+                    className="text-[var(--theme-accent-current)] hover:opacity-75 transition-all p-2"
                   >
                     {timerState.isRunning ? (
                       <Square className="w-5 h-5 fill-current" />
@@ -231,11 +225,16 @@ export function IndexSubTaskItem({
 
                   {timerState.isRunning && (
                     <button
-                      onClick={() => toggleSubtask(task.id)}
+                      onClick={() => {
+                        if (!task.completed) {
+                          playSound("/completed-sub-task.mp3").catch(() => {});
+                        }
+                        toggleSubtask(task.id);
+                      }}
                       className="transition-all p-2"
                       title="Mark as complete"
                     >
-                      <Check className="w-5 h-5 text-Green-400" />
+                      <Check className="w-5 h-5 text-[var(--theme-accent-current)]" />
                     </button>
                   )}
                 </div>

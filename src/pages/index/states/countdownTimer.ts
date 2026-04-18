@@ -1,6 +1,7 @@
 import { sendNotification } from "@tauri-apps/plugin-notification";
 import { addSeconds, differenceInMilliseconds } from "date-fns";
 import { create } from "zustand";
+import { playSound } from "../../../code/utils/audio";
 
 interface CountdownTimerState {
   activityMinutes: number;
@@ -47,18 +48,11 @@ const intervalRef: { current: ReturnType<typeof setInterval> | null } = {
 const endTimeRef: { current: Date | null } = { current: null };
 
 function playAlertSound() {
-  const alarmAudio = new Audio("/car-alarm.mp3");
-  const restartPositionInSeconds = 0;
-  alarmAudio.currentTime = restartPositionInSeconds;
-  alarmAudio
-    .play()
-    .catch(() => {})
-    .then(() => {
-      sendNotification({
-        title: "Timer Alert",
-        body: "Countdown finished.",
-      });
-    });
+  playSound("/car-alarm.mp3").catch(() => {});
+  sendNotification({
+    title: "Timer Alert",
+    body: "Countdown finished.",
+  });
 }
 
 export const useCountdownTimerState = create<CountdownTimerStore>(

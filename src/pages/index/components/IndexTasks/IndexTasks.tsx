@@ -49,16 +49,16 @@ export function IndexTasks() {
   return (
     <Box className="w-full max-w-[600px] ml-auto p-6 flex flex-col gap-8">
       <div className="flex flex-col gap-2">
-        <h2 className="text-2xl font-bold text-Black-700 dark:text-White flex items-center gap-1.5">
+        <h2 className="text-2xl font-bold text-[var(--theme-text-current)] flex items-center gap-1.5">
           {listingMode === "subtasks" && activeTask ? (
             <>
               <span
-                className="text-Black-400 cursor-pointer hover:text-Black-100 dark:hover:text-Black-300 transition-colors"
+                className="text-[var(--theme-subtext-current)] cursor-pointer hover:text-[var(--theme-text-current)] transition-colors"
                 onClick={handleExitSubtasks}
               >
                 Tasks
               </span>
-              <span className="text-Black-300 dark:text-Black-500">/</span>
+              <span className="text-[var(--theme-subtext-current)]/50">/</span>
               <span
                 className="truncate max-w-[350px] text-xl"
                 title={activeTask.title}
@@ -72,10 +72,6 @@ export function IndexTasks() {
             "Tasks"
           )}
         </h2>
-        <p className="text-Black-300 dark:text-Black-400 text-sm">
-          Manage your daily tasks efficiently, keep track of debugging time, and
-          avoid wasting time on easy tasks.
-        </p>
       </div>
 
       <div className="flex flex-col gap-4">
@@ -89,7 +85,7 @@ export function IndexTasks() {
         <div className="flex flex-col gap-3 max-h-[calc(100vh-400px)] min-h-[250px] overflow-y-auto">
           {activeTasks.length === 0 ? (
             <div className="grow flex items-center justify-center">
-              <span className="text-base text-Black-400">
+              <span className="text-base text-[var(--theme-subtext-current)]">
                 {listingMode === "tasks-group"
                   ? listingTasks.length > 0
                     ? "All tasks completed!"

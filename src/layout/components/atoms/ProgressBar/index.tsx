@@ -19,7 +19,7 @@ export function ProgressBar({
       </div>
       <div className="mt-2 h-2 w-full rounded-full bg-Black-100/50 dark:bg-Black-600">
         <div
-          className="h-2 rounded-full bg-Green-400 transition-all"
+          className="h-2 rounded-full bg-[var(--theme-accent-current)] transition-all"
           style={{ width: `${percentage}%` }}
         />
       </div>

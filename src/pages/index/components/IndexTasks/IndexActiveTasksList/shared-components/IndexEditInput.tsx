@@ -62,7 +62,7 @@ export function IndexEditInput({
       />
       <button
         onClick={handleSave}
-        className="p-2 text-Green-300 hover:text-Green-400 transition-colors"
+        className="p-2 text-[var(--theme-accent-current)]/70 hover:text-[var(--theme-accent-current)] transition-colors"
       >
         <Check className="w-5 h-5" />
       </button>

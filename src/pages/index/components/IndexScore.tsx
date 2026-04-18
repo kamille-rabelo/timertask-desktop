@@ -37,29 +37,28 @@ export function IndexScore() {
       label: "Total cycles",
       value: totalCycles,
       icon: Award,
-      color: "text-Green-400",
-      bg: "bg-Green-100",
+      colorClass:
+        "text-[var(--theme-accent-current)] bg-[var(--theme-accent-current)]/15",
     },
     {
       label: "Tasks Completed",
       value: `${tasksCompleted} tasks`,
       icon: CheckCircle2,
-      color: "text-Green-400",
-      bg: "bg-Green-100",
+      colorClass:
+        "text-[var(--theme-accent-current)] bg-[var(--theme-accent-current)]/15",
     },
     {
       label: "Focused Time",
       value: formatDuration(totalFocusedTime),
       icon: Clock,
-      color: "text-Blue-400",
-      bg: "bg-Blue-100",
+      colorClass:
+        "text-[var(--theme-secondary-current)] bg-[var(--theme-secondary-current)]/15",
     },
     {
       label: "Current Streak",
       value: `${currentStreak} days`,
       icon: Zap,
-      color: "text-Red-400",
-      bg: "bg-Red-100",
+      colorClass: "text-Red-400 bg-Red-400/15",
     },
   ];
 
@@ -71,20 +70,18 @@ export function IndexScore() {
             <div className="flex items-center gap-2">
               <div
                 className={twMerge(
-                  "flex items-center justify-center rounded-lg p-1.5 shadow-sm ring-1 ring-black/5 dark:ring-white/20",
-                  item.color,
-                  item.bg,
-                  "dark:bg-transparent",
+                  "flex items-center justify-center rounded-lg p-1.5 shadow-sm ring-1 ring-black/5",
+                  item.colorClass,
                 )}
               >
                 <item.icon size={14} />
               </div>
-              <span className="text-[10px] font-bold text-Black-450 uppercase tracking-tight dark:text-Black-400">
+              <span className="text-[10px] font-bold text-[var(--theme-subtext-current)] uppercase tracking-tight">
                 {item.label}
               </span>
             </div>
             <div className="pl-0.5">
-              <span className="text-xl font-bold text-Black-700 dark:text-White">
+              <span className="text-xl font-bold text-[var(--theme-text-current)] font-numeric">
                 {item.value}
               </span>
             </div>

@@ -66,7 +66,7 @@ export function IndexWorkflowListItem({
   }
 
   return (
-    <div className="flex items-center justify-between gap-3 rounded-xl border border-Black-100 bg-White px-4 py-3 dark:bg-Black-700 dark:border-Black-600">
+    <div className="flex items-center justify-between gap-3 rounded-xl border border-[var(--theme-border-current)] bg-[var(--theme-surface-current)] px-4 py-3">
       {state.isEditing ? (
         <Input
           value={state.editingTitle}
@@ -75,7 +75,7 @@ export function IndexWorkflowListItem({
           className="h-9 text-xs"
         />
       ) : (
-        <span className="text-sm font-medium text-Black-700 dark:text-White truncate">
+        <span className="text-sm font-medium text-[var(--theme-text-current)] truncate">
           {workflowTitle}
         </span>
       )}
@@ -85,14 +85,14 @@ export function IndexWorkflowListItem({
             <button
               type="button"
               onClick={handleSaveEditing}
-              className="flex h-8 w-8 items-center justify-center rounded-full text-Green-400 transition-colors hover:bg-Green-100"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--theme-accent-current)] transition-colors hover:bg-[var(--theme-accent-current)]/15"
             >
               <Check className="h-4 w-4" />
             </button>
             <button
               type="button"
               onClick={handleCancelEditing}
-              className="flex h-8 w-8 items-center justify-center rounded-full text-Black-300 transition-colors hover:bg-Black-100 dark:hover:bg-Black-600"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--theme-subtext-current)] transition-colors hover:bg-[var(--theme-border-current)]"
             >
               <X className="h-4 w-4" />
             </button>

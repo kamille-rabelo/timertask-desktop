@@ -91,10 +91,10 @@ export function IndexTaskItem({
   return (
     <>
       <div
-        className={`group flex items-center justify-between p-4 rounded-[12px] bg-white border transition-all shadow-sm hover:shadow-md dark:bg-Black-700 ${
+        className={`group flex items-center justify-between p-4 rounded-[12px] bg-[var(--theme-surface-current)] border transition-all shadow-sm hover:shadow-md ${
           isActive
-            ? "border-Green-400 bg-Green-50/30 dark:bg-Green-400/10"
-            : "border-Black-100/30 hover:border-Green-400/50 dark:border-Black-600"
+            ? "border-[var(--theme-accent-current)] bg-[var(--theme-accent-current)]/5"
+            : "border-[var(--theme-border-current)]/50 hover:border-[var(--theme-accent-current)]/50"
         }`}
       >
         {isEditing ? (
@@ -105,7 +105,7 @@ export function IndexTaskItem({
               {!task.isRunning && (
                 <div
                   {...dragHandleProps}
-                  className="cursor-grab active:cursor-grabbing text-Black-400 hover:text-Black-700 dark:hover:text-White transition-colors"
+                  className="cursor-grab active:cursor-grabbing text-[var(--theme-subtext-current)] hover:text-[var(--theme-text-current)] transition-colors"
                 >
                   <GripVertical className="w-5 h-5" />
                 </div>
@@ -113,10 +113,10 @@ export function IndexTaskItem({
               <span
                 className={`text-sm font-medium transition-colors break-all ${
                   task.completed
-                    ? "text-Black-400 line-through"
+                    ? "text-[var(--theme-subtext-current)] line-through"
                     : isActive
-                      ? "text-Black-700 dark:text-White font-semibold"
-                      : "text-Black-500 dark:text-Black-400"
+                      ? "text-[var(--theme-text-current)] font-semibold"
+                      : "text-[var(--theme-subtext-current)]"
                 }`}
               >
                 {task.title}
@@ -142,14 +142,14 @@ export function IndexTaskItem({
               {isActive ? (
                 <button
                   onClick={() => handleEnterSubtasks(task.id)}
-                  className="text-Blue-400 hover:text-Blue-500 transition-all p-2"
+                  className="text-[var(--theme-secondary-current)] hover:opacity-75 transition-all p-2"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
               ) : (
                 <button
                   onClick={() => handleToggleExpanded(task.id)}
-                  className="text-Black-400 hover:text-Black-600 dark:hover:text-White transition-all p-2"
+                  className="text-[var(--theme-subtext-current)] hover:text-[var(--theme-text-current)] transition-all p-2"
                 >
                   {isExpanded ? (
                     <ChevronUp className="w-5 h-5" />
@@ -164,11 +164,11 @@ export function IndexTaskItem({
       </div>
       {activeSubtask && hasSubtaskBeenStarted && (
         <div className="flex items-center justify-end">
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-white border border-Black-100/20 rounded-lg shadow-sm text-sm font-medium text-Black-700 transition-all hover:border-Green-400 hover:text-Green-500 dark:bg-Black-700 dark:border-Black-600 dark:text-White">
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-[var(--theme-surface-current)] border border-[var(--theme-border-current)]/50 rounded-lg shadow-sm text-sm font-medium text-[var(--theme-text-current)] transition-all hover:border-[var(--theme-accent-current)] hover:text-[var(--theme-accent-current)]">
             {isSubtaskTimerActive ? (
               <div className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-Green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-Green-500"></span>
+                <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--theme-accent-current)] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--theme-accent-current)]"></span>
               </div>
             ) : (
               <div className="h-2 w-2 rounded-full bg-Red-400"></div>
@@ -180,7 +180,7 @@ export function IndexTaskItem({
         </div>
       )}
       {!isActive && isExpanded && (
-        <div className="mt-2 flex flex-col gap-3 rounded-xl border border-Black-100/30 bg-Black-50/30 p-3 dark:border-Black-600 dark:bg-Black-700/50">
+        <div className="mt-2 flex flex-col gap-3 rounded-xl border border-[var(--theme-border-current)]/30 bg-[var(--theme-surface-current)]/50 p-3">
           <div className="flex flex-col gap-3">
             <div className="flex gap-2">
               <Input
@@ -206,7 +206,9 @@ export function IndexTaskItem({
                 ))}
               </div>
             ) : (
-              <div className="text-sm text-Black-400">No subtasks yet.</div>
+              <div className="text-sm text-[var(--theme-subtext-current)]">
+                No subtasks yet.
+              </div>
             )}
           </div>
 

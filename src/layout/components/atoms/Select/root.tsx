@@ -25,7 +25,7 @@ export function SelectRoot(props: SelectRootProps) {
     >
       {props.children}
       <RadixSelect.Portal>
-        <RadixSelect.Content className="z-50 overflow-hidden rounded-[12px] border border-Black-100 bg-White shadow-[0px_12px_40px_rgba(0,0,0,0.25)] dark:bg-Black-800 dark:border-Black-600">
+        <RadixSelect.Content className="z-50 overflow-hidden rounded-[12px] border border-[var(--theme-border-current)] bg-[var(--theme-surface-current)] shadow-[0px_12px_40px_rgba(0,0,0,0.25)]">
           <RadixSelect.ScrollUpButton className="flex items-center justify-center h-8 p-1 text-Black-100 dark:text-Black-400">
             <ChevronUp className="h-4 w-4" />
           </RadixSelect.ScrollUpButton>

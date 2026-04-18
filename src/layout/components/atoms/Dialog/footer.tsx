@@ -6,7 +6,7 @@ export interface DialogFooterProps {
 
 export function DialogFooter({ children }: DialogFooterProps) {
   return (
-    <div className="mt-6 border-t border-Black-100 pt-4 dark:border-Black-600">
+    <div className="mt-6 border-t border-[var(--theme-border-current)] pt-4">
       {children}
     </div>
   );
